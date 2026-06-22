@@ -423,36 +423,68 @@ img { max-width: 100%; display: block; }
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.is-visible { opacity: 1; transform: none; }
 
+/* ===================== OVERFLOW & WRAP SAFETY ===================== */
+html, body { overflow-x: hidden; }
+body { overflow-wrap: break-word; }
+/* allow flex/grid children to shrink instead of forcing the page wider than the screen */
+.hero__copy, .mission__lead, .showcase__text, .build__col, .card, .role,
+.principle, .member, .member > div, .join__intro > div { min-width: 0; }
+.cta__email a { word-break: break-word; }
+
 /* ===================== RESPONSIVE ===================== */
+@media (max-width: 1040px) {
+  .container { padding: 0 24px; }
+}
 @media (max-width: 940px) {
-  .mission, .build { grid-template-columns: 1fr; gap: 28px; }
-  .principles { grid-template-columns: repeat(2, 1fr); }
-  .pipeline__steps { grid-template-columns: repeat(2, 1fr); }
-  .cards, .roles { grid-template-columns: 1fr; }
-  .showcase__grid, .join__intro { grid-template-columns: 1fr; gap: 32px; }
+  .mission, .build { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pipeline__steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards, .roles { grid-template-columns: minmax(0, 1fr); }
+  .showcase__grid, .join__intro { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .showcase__frame { transform: none; }
   .join__img { order: -1; }
-  .team__grid { grid-template-columns: 1fr; }
-  .hero__grid { grid-template-columns: 1fr; }
+  .team__grid { grid-template-columns: minmax(0, 1fr); }
+  .hero__grid { grid-template-columns: minmax(0, 1fr); }
   .hero__art { display: none; }
 }
-@media (max-width: 720px) {
+/* collapse nav into a menu button before the links can crowd (covers iPad portrait) */
+@media (max-width: 900px) {
   .nav__links {
     position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0;
-    background: #fff; border-bottom: 1px solid var(--line);
+    background: #fff; border-bottom: 1px solid var(--line); box-shadow: var(--shadow-md);
     max-height: 0; overflow: hidden; transition: max-height 0.3s var(--ease);
   }
-  .nav__links.open { max-height: 420px; }
-  .nav__links a { padding: 14px 28px; width: 100%; border-top: 1px solid var(--line); }
+  .nav__links.open { max-height: 580px; }
+  .nav__links a { padding: 15px 28px; width: 100%; border-top: 1px solid var(--line); }
   .nav__cta { border-radius: 0; margin: 0; }
   .nav__toggle { display: flex; }
   .nav__brandtext small { display: none; }
-  .section { padding: 68px 0; }
-  .hero__inner { padding: 64px 28px 76px; }
-  .hero__stats { gap: 28px; }
 }
-@media (max-width: 460px) {
-  .principles { grid-template-columns: 1fr; }
-  .pipeline__steps { grid-template-columns: 1fr; }
+@media (max-width: 720px) {
+  .section { padding: 64px 0; }
+  .hero__inner { padding: 58px 24px 70px; }
+  .hero__stats { gap: 26px 30px; }
+  .pipeline { margin-top: 52px; }
+}
+@media (max-width: 560px) {
+  .principles { grid-template-columns: minmax(0, 1fr); }
+  .pipeline__steps { grid-template-columns: minmax(0, 1fr); }
   .flow { gap: 6px; }
+  .hero__actions { flex-direction: column; align-items: stretch; }
+  .hero__actions .btn { width: 100%; }
+  .affil__chip { flex: 1 1 calc(50% - 9px); min-width: 0; padding: 16px 12px 14px; }
+  .affil__logo img { max-width: 116px; }
+}
+@media (max-width: 430px) {
+  .container { padding: 0 18px; }
+  .hero__title { font-size: 30px; }
+  .hero__lede { font-size: 16px; }
+  .section__title { font-size: 23px; }
+  .build__col { padding: 24px 20px; }
+  .card, .role, .member { padding: 22px 20px; }
+  .member { gap: 16px; }
+  .member__avatar { width: 64px; height: 64px; font-size: 20px; }
+  .showcase__meta { gap: 8px; }
+  .imageband__inner { padding: 52px 18px; }
+  .cta__title { font-size: 26px; }
 }
