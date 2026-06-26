@@ -375,7 +375,7 @@ img { max-width: 100%; display: block; }
 .btn--outline:hover { transform: translateY(-2px); border-color: var(--gold-400); }
 
 /* ===================== TEAM ===================== */
-.team__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 44px; max-width: 900px; }
+.team__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 44px; max-width: 1040px; }
 .member {
   display: flex; gap: 20px; align-items: center; background: #fff; border: 1px solid var(--line);
   border-radius: var(--radius); padding: 26px 28px; box-shadow: var(--shadow-sm);
